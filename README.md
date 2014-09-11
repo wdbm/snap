@@ -1,14 +1,10 @@
 # snap
 
+## introduction
+
 Snap provides a simple way to move and resize windows.
 
-# prerequisites
-
-## docopt
-
-    sudo apt-get -y install python-docopt
-
-# usage
+## usage
 
 |**option** |**description**           |
 |-----------|--------------------------|
@@ -24,3 +20,9 @@ Snap provides a simple way to move and resize windows.
 |--downright|Snap window bottom right. |
 |--maximise |Maximise window.          |
 |--minimise |Minimise window.          |
+
+## prerequisites
+
+### docopt
+
+    sudo apt-get -y install python-docopt
