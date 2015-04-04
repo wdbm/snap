@@ -49,7 +49,8 @@ Options:
     --minimise    Minimise window.
 """
 
-version = "2014-09-10T2349"
+name    = "snap"
+version = "2015-04-04T2331Z"
 
 from docopt import docopt
 import logging
@@ -62,10 +63,15 @@ def main(options):
     global program
     program = Program()
 
-    logger.info("dispay resolution: {displayResolutionWidth} * {displayResolutionHeight}".format(
-        displayResolutionWidth = displayInformation(dimension = "width"),
-        displayResolutionHeight = displayInformation(dimension = "height")
-    ))
+    _message =\
+        "display resolution: " +\
+        "{displayResolutionWidth} * {displayResolutionHeight}"
+    logger.info(
+        _message.format(
+            displayResolutionWidth = displayInformation(dimension = "width"),
+            displayResolutionHeight = displayInformation(dimension = "height")
+        )
+    )
 
     if options["--left"]:
         snapWindow(position = "left")
@@ -95,7 +101,7 @@ class Program(object):
         parent = None
         ):
         # name
-        self.name = "snap"
+        self.name = name
         # logging
         global logger
         logger = logging.getLogger(__name__)
@@ -128,50 +134,50 @@ def snapWindow(
             "left": {
                 "coordinatex": 0,
                 "coordinatey": 0,
-                "dimensionx": displayResolutionWidth/2,
+                "dimensionx": displayResolutionWidth / 2,
                 "dimensiony": displayResolutionHeight
             },
             "right": {
-                "coordinatex": displayResolutionWidth/2,
+                "coordinatex": displayResolutionWidth / 2,
                 "coordinatey": 0,
-                "dimensionx": displayResolutionWidth/2,
+                "dimensionx": displayResolutionWidth / 2,
                 "dimensiony": displayResolutionHeight
             },
             "up": {
                 "coordinatex": 0,
                 "coordinatey": 0,
                 "dimensionx": displayResolutionWidth,
-                "dimensiony": displayResolutionHeight/2
+                "dimensiony": displayResolutionHeight / 2
             },
             "down": {
                 "coordinatex": 0,
-                "coordinatey": displayResolutionHeight/2,
+                "coordinatey": displayResolutionHeight / 2,
                 "dimensionx": displayResolutionWidth,
-                "dimensiony": displayResolutionHeight/2
+                "dimensiony": displayResolutionHeight / 2
             },
             "upleft": {
                 "coordinatex": 0,
                 "coordinatey": 0,
-                "dimensionx": displayResolutionWidth/2,
-                "dimensiony": displayResolutionHeight/2
+                "dimensionx": displayResolutionWidth / 2,
+                "dimensiony": displayResolutionHeight / 2
             },
             "upright": {
-                "coordinatex": displayResolutionWidth/2,
+                "coordinatex": displayResolutionWidth / 2,
                 "coordinatey": 0,
-                "dimensionx": displayResolutionWidth/2,
-                "dimensiony": displayResolutionHeight/2
+                "dimensionx": displayResolutionWidth / 2,
+                "dimensiony": displayResolutionHeight / 2
             },
             "downleft": {
                 "coordinatex": 0,
-                "coordinatey": displayResolutionHeight/2,
-                "dimensionx": displayResolutionWidth/2,
-                "dimensiony": displayResolutionHeight/2
+                "coordinatey": displayResolutionHeight / 2,
+                "dimensionx": displayResolutionWidth / 2,
+                "dimensiony": displayResolutionHeight / 2
             },
             "downright": {
-                "coordinatex": displayResolutionWidth/2,
-                "coordinatey": displayResolutionHeight/2,
-                "dimensionx": displayResolutionWidth/2,
-                "dimensiony": displayResolutionHeight/2
+                "coordinatex": displayResolutionWidth / 2,
+                "coordinatey": displayResolutionHeight / 2,
+                "dimensionx": displayResolutionWidth / 2,
+                "dimensiony": displayResolutionHeight / 2
             },
             "maximise": {
                 "coordinatex": 0,
@@ -196,13 +202,17 @@ def snapWindow(
         coordinatey = snapConfiguration["position"][position]["coordinatey"]
         dimensionx  = snapConfiguration["position"][position]["dimensionx"]
         dimensiony  = snapConfiguration["position"][position]["dimensiony"]
-        logger.info(u"moving {position} window {windowID} to co\u00F6rdinates ({coordinatex}, {coordinatey}) and resizing to {dimensionx} * {dimensiony}".format(
-            position = position,
-            windowID = windowID,
+        _message =\
+            u"moving {position} window {windowID} to co\u00F6rdinates " +\
+            u"({coordinatex}, {coordinatey}) and resizing to {dimensionx} * " +\
+            u"{dimensiony}"
+        logger.info(_message.format(
+            position    = position,
+            windowID    = windowID,
             coordinatex = coordinatex,
             coordinatey = coordinatey,
-            dimensionx = dimensionx,
-            dimensiony = dimensiony
+            dimensionx  = dimensionx,
+            dimensiony  = dimensiony
         ))
         subprocess.call([
             "xdotool",
