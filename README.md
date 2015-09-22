@@ -25,4 +25,7 @@ Snap provides a simple way to move and resize windows.
 
 ### docopt
 
-    sudo apt-get -y install python-docopt
+```Bash
+sudo apt-get -y install python-docopt
+sudo apt-get -y install xdotool
+```
